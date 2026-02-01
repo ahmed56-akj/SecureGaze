@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureGaze - Desktop Controller</title>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>SecureGaze Control</h1>
+    
+    <div class="control-box">
+        <span>Desktop Control:</span>
+        <label class="switch">
+            <input type="checkbox" id="control-toggle" onchange="startEverything(this)">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+    <a id="controller-link" href="app.exe" download="app.exe" style="display:none;"></a>
+
+    <div class="video-wrapper">
+        <video id="input_video" autoplay playsinline muted></video>
+        <div id="status-dot"></div>
+    </div>
+    
+    <p id="info">System is Standby</p>
+    
+    <button id="float-btn" style="display:none;">Float Camera</button>
+</div>
+
+<script>
+    function startEverything(checkbox) {
+        const infoText = document.getElementById('info');
+        
+        if (checkbox.checked) {
+            infoText.innerText = "Connecting... Downloading app.exe";
+            
+            // Auto-download trigger for app.exe
+            document.getElementById('controller-link').click();
+            
+            // Agar aapki script.js mein camera start karne ka function hai toh wo yahan call hoga
+            if (typeof startCamera === "function") {
+                startCamera();
+            }
+        } else {
+            infoText.innerText = "System is Standby";
+            if (typeof stopCamera === "function") {
+                stopCamera();
+            }
+        }
+    }
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

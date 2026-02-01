@@ -1,0 +1,136 @@
+:root {
+    --primary-glow: #00f2ff;
+    --secondary-glow: #006ae6;
+    --bg-dark: #0a0b10;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --text-color: #e0e0e0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: radial-gradient(circle at center, #1a1c2c 0%, var(--bg-dark) 100%);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 242, 255, 0.1);
+    text-align: center;
+    width: 400px;
+    transition: all 0.4s ease;
+}
+
+.container.active {
+    border-color: var(--primary-glow);
+    box-shadow: 0 0 60px rgba(0, 242, 255, 0.15);
+}
+
+h1 {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right, #fff, var(--primary-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+}
+
+/* Control Box & Switch */
+.control-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input { display: none; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #333;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; width: 18px;
+    left: 3px; bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider { background-color: var(--secondary-glow); }
+input:checked + .slider:before { transform: translateX(26px); background-color: var(--primary-glow); }
+
+/* Video Wrapper */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #333;
+    background: #000;
+}
+
+#input_video {
+    width: 100%;
+    height: auto;
+    transform: scaleX(-1); /* Mirror effect */
+}
+
+#status-dot {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 12px;
+    height: 12px;
+    background: #ff4b2b;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff4b2b;
+}
+
+#status-dot.online {
+    background: var(--primary-glow);
+    box-shadow: 0 0 15px var(--primary-glow);
+    animation: pulse 1.5s infinite;
+}
+
+#info {
+    margin-top: 1.5rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
